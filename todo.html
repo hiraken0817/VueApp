@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <title>ToDoリスト</title>
+    <style>
+        #app3 li>span.done {
+            text-decoration: line-through;
+            color: #bbb;
+        }
+    </style>
+    <title></title>
+</head>
+
+<div id="app">
+    <h1>VueApp</h1>
+    <p>Hello{{ name }}</p>
+
+    <p><input type="text" v-model="name"></p>
+    <p>Hello {{ name.toUpperCase() }}</p><!-- 入力したものを出力 -->
+</div>
+
+<div id="app2">
+    <ul>
+        <li>{{ todos[0] }}</li>
+        <li>{{ todos[1] }}</li>
+        <li>{{ todos[2] }}</li>
+    </ul>
+
+    <ul>
+        <li v-for="todo in todos">{{ todo }}</li>
+    </ul>
+</div>
+<hr>
+<div id="app3">
+
+    <h2>({{ notYet.length }}/{{ todos.length }})
+        <button @click="deleteTodos">完了タスクの削除</button>
+    </h2>
+    <form v-on:submit="addTodo">
+        <input type="text" v-model="newTodo">
+        <input type="text" v-model="newTodo2">
+        <input type="submit" value="タスクを追加">
+    </form>
+    <ul v-if="todos.length">
+        <li v-for="(todo , index) in todos">
+            <input type="checkbox" v-model="todo.isDone">
+            <span v-bind:class="{done:todo.isDone}"> {{ todo.title }} {{ todo.val}} </span>
+            <span v-on:click="deleteTodo(index)" class="delete">[✖︎]</span>
+        </li>
+    </ul>
+    <ul v-else>
+        <li>タスクがありません</li>
+    </ul>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script src="js/todo.js"></script>
+
+</html>
